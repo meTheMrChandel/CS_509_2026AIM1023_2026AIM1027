@@ -179,6 +179,24 @@ static void compile_assignment_02()
     }
 }
 
+// Generates a list of all graph test files found in tests folder matching a prefix for Assignment 02.
+static std::vector<std::string> list_assignment_02_test_files(const std::string& str_prefix)
+{
+    std::vector<std::string> v_files;
+    const int i_scales[] = {10, 100, 10000, 50000, 100000};
+
+    for (int i_scale : i_scales)
+    {
+        std::string str_filename = str_prefix + std::to_string(i_scale) + ".txt";
+        if (file_exists("../assignment_02/tests/" + str_filename))
+        {
+            v_files.push_back(str_filename);
+        }
+    }
+
+    return v_files;
+}
+
 // Runs a selected algorithm on a manually specified test file.
 static void run_assignment_02_interactive()
 {
@@ -190,16 +208,57 @@ static void run_assignment_02_interactive()
         return;
     }
 
+    int algo_choice = -1;
     std::string str_algorithm;
+
+    std::cout << "\nSelect Algorithm:\n";
+    std::cout << "1. Triangle Counting (tc)\n";
+    std::cout << "2. Connected Components (cc)\n";
+    std::cout << "3. Betweenness Centrality (bc)\n";
+    std::cout << "Enter choice (1-3): ";
+    std::cin >> algo_choice;
+
+    if (algo_choice == 1) {
+        str_algorithm = "tc";
+    } else if (algo_choice == 2) {
+        str_algorithm = "cc";
+    } else if (algo_choice == 3) {
+        str_algorithm = "bc";
+    } else {
+        std::cout << "Invalid choice.\n";
+        return;
+    }
+
+    if (str_algorithm == "bc") {
+        run_command(str_executable + " bc dummy");
+        return;
+    }
+
+    // List available test files matching algorithm prefix
+    std::vector<std::string> test_files = list_assignment_02_test_files(str_algorithm + "_");
+    
+    std::cout << "\nSelect Test File:\n";
+    for (size_t i = 0; i < test_files.size(); ++i) {
+        std::cout << i + 1 << ". " << test_files[i] << "\n";
+    }
+    std::cout << test_files.size() + 1 << ". Enter custom path\n";
+    std::cout << "Enter choice: ";
+    
+    size_t file_choice = 0;
+    std::cin >> file_choice;
+
     std::string str_test_file;
+    if (file_choice >= 1 && file_choice <= test_files.size()) {
+        str_test_file = "tests\\" + test_files[file_choice - 1];
+    } else if (file_choice == test_files.size() + 1) {
+        std::cout << "Enter custom file path: ";
+        std::cin >> str_test_file;
+    } else {
+        std::cout << "Invalid choice.\n";
+        return;
+    }
 
-    std::cout << "Select algorithm (tc/cc/bc): ";
-    std::cin >> str_algorithm;
-
-    std::cout << "Enter test file name (e.g. tc_10.txt): ";
-    std::cin >> str_test_file;
-
-    run_command(str_executable + " " + str_algorithm + " tests\\" + str_test_file);
+    run_command(str_executable + " " + str_algorithm + " " + str_test_file);
 }
 
 // Submenu interface for Assignment 02.

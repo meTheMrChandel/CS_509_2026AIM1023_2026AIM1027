@@ -21,10 +21,32 @@ int main(int argc, char* argv[]) {
     std::string test_file;
 
     if (argc < 3) {
-        std::cout << "Select algorithm (tc/cc/bc): ";
-        if (!(std::cin >> algorithm)) {
+        int algo_choice = -1;
+        std::cout << "\nSelect Algorithm:\n";
+        std::cout << "1. Triangle Counting (tc)\n";
+        std::cout << "2. Connected Components (cc)\n";
+        std::cout << "3. Betweenness Centrality (bc)\n";
+        std::cout << "Enter choice (1-3): ";
+        if (!(std::cin >> algo_choice)) {
             return 1;
         }
+
+        if (algo_choice == 1) {
+            algorithm = "tc";
+        } else if (algo_choice == 2) {
+            algorithm = "cc";
+        } else if (algo_choice == 3) {
+            algorithm = "bc";
+        } else {
+            std::cerr << "Error: Invalid choice.\n";
+            return 1;
+        }
+
+        if (algorithm == "bc") {
+            std::cout << "Betweenness Centrality is not implemented yet. (For buddy to implement)\n";
+            return 0;
+        }
+
         std::cout << "Enter test file path: ";
         if (!(std::cin >> test_file)) {
             return 1;
