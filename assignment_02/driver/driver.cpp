@@ -22,11 +22,7 @@ int main(int argc, char* argv[]) {
 
     if (argc < 3) {
         int algo_choice = -1;
-        std::cout << "\nSelect Algorithm:\n";
-        std::cout << "1. Triangle Counting (tc)\n";
-        std::cout << "2. Connected Components (cc)\n";
-        std::cout << "3. Betweenness Centrality (bc)\n";
-        std::cout << "Enter choice (1-3): ";
+        std::cout << "Select Algorithm: Type 1 for Triangle Counting, 2 for Connected Components, or 3 for Betweenness Centrality: ";
         if (!(std::cin >> algo_choice)) {
             return 1;
         }
@@ -47,7 +43,7 @@ int main(int argc, char* argv[]) {
             return 0;
         }
 
-        std::cout << "Enter test file path: ";
+        std::cout << "Enter test file path: Type the path to your test file (e.g. tests/tc_10.txt or tests/cc_100.txt): ";
         if (!(std::cin >> test_file)) {
             return 1;
         }
