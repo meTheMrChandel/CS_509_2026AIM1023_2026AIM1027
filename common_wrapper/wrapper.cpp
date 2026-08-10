@@ -166,6 +166,73 @@ static void show_assignment_01_menu()
     }
 }
 
+// Invokes Makefile compilation for Assignment 02 in buddy repo.
+static void compile_assignment_02()
+{
+    if (run_command("mingw32-make -C ..\\assignment_02") != 0)
+    {
+        std::cout << "Error: Compilation failed for Assignment 02.\n";
+    }
+    else
+    {
+        std::cout << "Assignment 02 compiled successfully.\n";
+    }
+}
+
+// Runs a selected algorithm on a manually specified test file.
+static void run_assignment_02_interactive()
+{
+    const std::string str_executable = "..\\assignment_02\\graph_simulator.exe";
+
+    if (!file_exists(str_executable))
+    {
+        std::cout << "Error: Executable not found. Compile Assignment 02 first.\n";
+        return;
+    }
+
+    std::string str_algorithm;
+    std::string str_test_file;
+
+    std::cout << "Select algorithm (tc/cc/bc): ";
+    std::cin >> str_algorithm;
+
+    std::cout << "Enter test file name (e.g. tc_10.txt): ";
+    std::cin >> str_test_file;
+
+    run_command(str_executable + " " + str_algorithm + " tests\\" + str_test_file);
+}
+
+// Submenu interface for Assignment 02.
+static void show_assignment_02_menu()
+{
+    int i_choice = -1;
+
+    while (i_choice != 0)
+    {
+        std::cout << "\n===== Assignment 02: Graph Analytics =====\n";
+        std::cout << "1. Compile Assignment 02\n";
+        std::cout << "2. Run Assignment 02 (Interactive)\n";
+        std::cout << "0. Back\n";
+        std::cout << "Enter choice: ";
+        std::cin >> i_choice;
+
+        switch (i_choice)
+        {
+            case 1:
+                compile_assignment_02();
+                break;
+            case 2:
+                run_assignment_02_interactive();
+                break;
+            case 0:
+                break;
+            default:
+                std::cout << "Invalid choice.\n";
+                break;
+        }
+    }
+}
+
 int main()
 {
     int i_choice = -1;
@@ -176,7 +243,7 @@ int main()
         std::cout << "     CS509 Buddy Repository Menu\n";
         std::cout << "=====================================\n";
         std::cout << "1. Assignment 01 - BFS, DFS, SSSP\n";
-        std::cout << "2. Assignment 02 (not available)\n";
+        std::cout << "2. Assignment 02 - TC, BC, CC\n";
         std::cout << "3. Assignment 03 (not available)\n";
         std::cout << "4. Assignment 04 (not available)\n";
         std::cout << "5. Assignment 05 (not available)\n";
@@ -195,6 +262,8 @@ int main()
                 show_assignment_01_menu();
                 break;
             case 2:
+                show_assignment_02_menu();
+                break;
             case 3:
             case 4:
             case 5:
@@ -216,3 +285,4 @@ int main()
 
     return 0;
 }
+
