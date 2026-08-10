@@ -1,0 +1,83 @@
+#include "../include/graph.h"
+#include "../include/connected_components.h"
+#include "../include/triangle_counting.h"
+#include "../include/timer.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+static void print_usage() {
+    std::cout << "Usage:\n";
+    std::cout << "  graph_simulator <tc|cc|bc> <test_file>\n";
+}
+
+int main(int argc, char* argv[]) {
+    // Fast I/O
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+
+    std::string algorithm;
+    std::string test_file;
+
+    if (argc < 3) {
+        std::cout << "Select algorithm (tc/cc/bc): ";
+        if (!(std::cin >> algorithm)) {
+            return 1;
+        }
+        std::cout << "Enter test file path: ";
+        if (!(std::cin >> test_file)) {
+            return 1;
+        }
+    } else {
+        algorithm = argv[1];
+        test_file = argv[2];
+    }
+
+    if (algorithm == "bc") {
+        std::cout << "Betweenness Centrality is not implemented yet. (For buddy to implement)\n";
+        return 0;
+    }
+
+    if (algorithm != "tc" && algorithm != "cc") {
+        std::cerr << "Error: Unknown algorithm '" << algorithm << "'. Use 'tc', 'cc', or 'bc'.\n";
+        return 1;
+    }
+
+    GraphInput input;
+    if (!read_undirected_graph(test_file, input)) {
+        std::cerr << "Error: Failed to read graph from file '" << test_file << "'.\n";
+        return 1;
+    }
+
+    if (algorithm == "tc") {
+        TimePoint start = start_timer();
+        TriangleResult result = count_triangles(input.v_adj_list);
+        double elapsed_us = stop_timer_us(start);
+
+        std::cout << "Algorithm: Triangle Counting\n";
+        std::cout << "Total triangles: " << result.total_triangles << "\n";
+        if (input.i_vertex_count <= 100) {
+            std::cout << "Triangles found:\n";
+            for (const auto& t : result.triangles_found) {
+                std::cout << "(" << t.u << ", " << t.v << ", " << t.w << ")\n";
+            }
+        }
+        std::cout << "Execution time: " << elapsed_us << " us\n";
+
+    } else if (algorithm == "cc") {
+        TimePoint start = start_timer();
+        CCResult result = find_connected_components(input.v_adj_list);
+        double elapsed_us = stop_timer_us(start);
+
+        std::cout << "Algorithm: Connected Components\n";
+        std::cout << "Number of components: " << result.total_components << "\n";
+        std::cout << "Vertex Component\n";
+        for (int i = 0; i < input.i_vertex_count; ++i) {
+            std::cout << i << " " << result.v_components[i] << "\n";
+        }
+        std::cout << "Execution time: " << elapsed_us << " us\n";
+    }
+
+    return 0;
+}
