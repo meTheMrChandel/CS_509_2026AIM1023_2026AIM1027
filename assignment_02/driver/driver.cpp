@@ -41,6 +41,7 @@ int main(int argc, char* argv[]) {
 
     if (algorithm != "tc" && algorithm != "cc") {
         std::cerr << "Error: Unknown algorithm '" << algorithm << "'. Use 'tc', 'cc', or 'bc'.\n";
+        print_usage();
         return 1;
     }
 
