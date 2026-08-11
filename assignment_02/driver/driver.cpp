@@ -1,7 +1,9 @@
 #include "../include/graph.h"
 #include "../include/connected_components.h"
 #include "../include/triangle_counting.h"
+#include "../include/betweenness_centrality.h"
 #include "../include/timer.h"
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -42,11 +44,6 @@ int main(int argc, char* argv[]) {
             return 1;
         }
 
-        if (algorithm == "bc") {
-            std::cout << "Betweenness Centrality is not implemented yet. (For buddy to implement)\n";
-            return 0;
-        }
-
         std::cout << "Enter test file path: ";
         if (!(std::cin >> test_file)) {
             return 1;
@@ -56,12 +53,7 @@ int main(int argc, char* argv[]) {
         test_file = argv[2];
     }
 
-    if (algorithm == "bc") {
-        std::cout << "Betweenness Centrality is not implemented yet. (For buddy to implement)\n";
-        return 0;
-    }
-
-    if (algorithm != "tc" && algorithm != "cc") {
+    if (algorithm != "tc" && algorithm != "cc" && algorithm != "bc") {
         std::cerr << "Error: Unknown algorithm '" << algorithm << "'. Use 'tc', 'cc', or 'bc'.\n";
         print_usage();
         return 1;
@@ -98,6 +90,19 @@ int main(int argc, char* argv[]) {
         std::cout << "Vertex Component\n";
         for (int i = 0; i < input.i_vertex_count; ++i) {
             std::cout << i << " " << result.v_components[i] << "\n";
+        }
+        std::cout << "Execution time: " << elapsed_us << " us\n";
+
+    } else if (algorithm == "bc") {
+        TimePoint start = start_timer();
+        BCResult result = compute_betweenness_centrality(input.v_adj_list);
+        double elapsed_us = stop_timer_us(start);
+
+        std::cout << "Algorithm: Betweenness Centrality\n";
+        std::cout << std::fixed << std::setprecision(6);
+        std::cout << "Vertex Centrality\n";
+        for (int i = 0; i < input.i_vertex_count; ++i) {
+            std::cout << i << " " << result.v_centrality[i] << "\n";
         }
         std::cout << "Execution time: " << elapsed_us << " us\n";
     }
