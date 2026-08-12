@@ -1,5 +1,5 @@
-#include "gradient_descent.h"
-#include "maxflow_mincut.h"
+#include "../src/gradient_descent.h"
+#include "../src/maxflow_mincut.h"
 #include <iostream>
 #include <string>
 #include <iomanip>

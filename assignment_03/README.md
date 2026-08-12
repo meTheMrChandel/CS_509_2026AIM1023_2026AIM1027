@@ -4,7 +4,7 @@ This repository contains the C++ implementation of the **Gradient Descent** opti
 
 ## Project Structure
 
-*   [`src/main.cpp`](file:///d:/MTech/1st%20Semester/CS_509_Buddy/CS_509_2026AIM1023_2026AIM1023/assignment_03/src/main.cpp): Command-line interface driver that handles interactive user prompts for algorithm selection and input filepath.
+*   [`driver/main.cpp`](file:///d:/MTech/1st%20Semester/CS_509_Buddy/CS_509_2026AIM1023_2026AIM1023/assignment_03/driver/main.cpp): Command-line interface driver that handles interactive user prompts for algorithm selection and input filepath.
 *   [`src/gradient_descent.h`](file:///d:/MTech/1st%20Semester/CS_509_Buddy/CS_509_2026AIM1023_2026AIM1023/assignment_03/src/gradient_descent.h) / [`src/gradient_descent.cpp`](file:///d:/MTech/1st%20Semester/CS_509_Buddy/CS_509_2026AIM1023_2026AIM1023/assignment_03/src/gradient_descent.cpp): Implementation of the polynomial evaluation, derivative computation, and optimization loop.
 *   [`src/maxflow_mincut.h`](file:///d:/MTech/1st%20Semester/CS_509_Buddy/CS_509_2026AIM1023_2026AIM1023/assignment_03/src/maxflow_mincut.h) / [`src/maxflow_mincut.cpp`](file:///d:/MTech/1st%20Semester/CS_509_Buddy/CS_509_2026AIM1023_2026AIM1023/assignment_03/src/maxflow_mincut.cpp): Empty stubs for the other buddy task.
 *   [`Makefile`](file:///d:/MTech/1st%20Semester/CS_509_Buddy/CS_509_2026AIM1023_2026AIM1023/assignment_03/Makefile): Compilation configuration.
