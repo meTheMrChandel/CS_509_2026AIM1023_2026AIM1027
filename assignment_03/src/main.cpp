@@ -19,7 +19,7 @@ int main() {
     }
 
     std::string filepath;
-    std::cout << "Enter the path to the input file: ";
+    std::cout << "Enter the path to the input file (e.g., tests/gd_01.txt, tests/gd_02.txt, tests/gd_03.txt, tests/gd_04.txt, tests/gd_05.txt): ";
     if (!(std::cin >> filepath)) {
         std::cerr << "Error: Invalid input path.\n";
         return 1;
