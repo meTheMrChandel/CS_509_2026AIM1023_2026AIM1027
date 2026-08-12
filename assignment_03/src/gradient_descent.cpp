@@ -85,6 +85,38 @@ double GradientDescentSolver::evaluate_derivative(const std::vector<double>& coe
 }
 
 OptimizationResult GradientDescentSolver::optimize(const OptimizationConfig& config) {
-    (void)config;
-    return OptimizationResult();
+    double x = config.initial_x;
+    int iterations = 0;
+    bool converged = false;
+
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+    while (iterations < config.max_iterations) {
+        double derivative = evaluate_derivative(config.coefficients, x);
+        if (std::abs(derivative) <= config.convergence_tolerance) {
+            converged = true;
+            break;
+        }
+        x = x - config.learning_rate * derivative;
+        iterations++;
+    }
+
+    // Final convergence check at the final point if we hit max iterations
+    if (!converged) {
+        double derivative = evaluate_derivative(config.coefficients, x);
+        if (std::abs(derivative) <= config.convergence_tolerance) {
+            converged = true;
+        }
+    }
+
+    auto end_time = std::chrono::high_resolution_clock::now();
+
+    OptimizationResult result;
+    result.final_x = x;
+    result.final_fx = evaluate_polynomial(config.coefficients, x);
+    result.iterations_completed = iterations;
+    result.is_converged = converged;
+    result.elapsed_time_microseconds = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+
+    return result;
 }
