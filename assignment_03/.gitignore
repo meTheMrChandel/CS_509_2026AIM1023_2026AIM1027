@@ -8,3 +8,6 @@ build/
 # IDE files
 .vscode/
 .idea/
+
+# Assignment documents
+*.pdf
