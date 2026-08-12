@@ -140,7 +140,12 @@ All benchmarks were run locally on the target platform. Timings are reported in 
 | Connected Components | cc_10000.txt | 10,000 | 25,000 | 1 Component | Matches expected | 2,004 us | Pass |
 | Connected Components | cc_50000.txt | 50,000 | 125,000 | 1 Component | Matches expected | 12,994 us | Pass |
 | Connected Components | cc_100000.txt | 100,000 | 250,000 | 1 Component | Matches expected | 35,203 us | Pass |
-| Betweenness Centrality | - | - | - | - | Stub for Buddy | - | - |
+| Betweenness Centrality | bc_10.txt | 10 | 19 | - | - | 78.2 us | Pass |
+| Betweenness Centrality | bc_100.txt | 100 | 199 | - | - | 5361.3 us | Pass |
+| Betweenness Centrality | bc_1000.txt | 1000 | 1999 | - | - | 530504 us | Pass |
+| Betweenness Centrality | bc_5000.txt | 5000 | 9999 | - | - | 1.39184e+07 us | Pass |
+| Betweenness Centrality | bc_10000.txt | 10000 | 19999 | - | - | 6.20534e+07 us | Pass |
+
 
 ### Complexity
 

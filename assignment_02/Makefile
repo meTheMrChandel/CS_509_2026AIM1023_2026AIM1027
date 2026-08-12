@@ -12,6 +12,9 @@ SRC = src/graph.cpp \
 
 INC = -Iinclude
 
+run: $(TARGET)
+	./$(TARGET)
+
 $(TARGET): $(SRC)
 	$(CXX) $(CXXFLAGS) $(SRC) $(INC) -o $(TARGET)
 
