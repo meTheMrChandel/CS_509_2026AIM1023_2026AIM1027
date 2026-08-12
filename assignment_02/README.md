@@ -87,7 +87,8 @@ Implement undirected graph analytics (Triangle Counting and Connected Components
 - **Graph Loader:** Reads and validates space-separated undirected adjacency list input. Checks for invalid degree values and rejects negative edge weights. Sorts neighbors of each vertex to optimize adjacency scans.
 - **Triangle Counting:** Implements an optimized ordered search ($u < v < w$). For each vertex $u$, iterates through its neighbors $v > u$, then through $w > v$. A binary search is performed on $v$'s neighbor list to check if edge $(v, w)$ exists. This prevents triple counting and avoids divisions. For $V \le 100$, lists all unique triangles in sorted lexicographical order.
 - **Connected Components:** Implements component finding via repeated Breadth-First Search (BFS) directly on the Adjacency List. Component IDs are assigned from 0 in the order they are first discovered.
-- **Betweenness Centrality:** Stub files are created and left blank for your buddy to implement.
+- **Betweenness Centrality:** Implements Brandes' algorithm to compute betweenness centrality for all vertices. The algorithm automatically detects whether the graph is unweighted or weighted to compute shortest paths. 
+
 
 ### Input Format
 
