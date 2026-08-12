@@ -1,0 +1,10 @@
+# Build artifacts
+*.o
+*.obj
+main
+main.exe
+build/
+
+# IDE files
+.vscode/
+.idea/
