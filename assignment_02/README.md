@@ -7,7 +7,7 @@ This repository contains buddy (pair) assignments for CS509. Assignment 02 imple
 ## Student / Pair Details
 
 - **Student 1:** Vishal Chandel (2026AIM1023)
-- **Student 2:** (To be completed by Buddy)
+- **Student 2:** Kuber Pathak (2026AIM1027)
 - **Program:** M.Tech Artificial Intelligence, IIT Ropar
 
 ## Language and Environment
@@ -30,13 +30,13 @@ CS_509_2026AIM1023_2026AIM1023/
     |-- driver/
     |   `-- driver.cpp
     |-- include/
-    |   |-- betweenness_centrality.h (Blank for Buddy)
+    |   |-- betweenness_centrality.h
     |   |-- connected_components.h
     |   |-- graph.h
     |   |-- timer.h
     |   `-- triangle_counting.h
     |-- src/
-    |   |-- betweenness_centrality.cpp (Blank for Buddy)
+    |   |-- betweenness_centrality.cpp 
     |   |-- connected_components.cpp
     |   |-- graph.cpp
     |   |-- timer.cpp

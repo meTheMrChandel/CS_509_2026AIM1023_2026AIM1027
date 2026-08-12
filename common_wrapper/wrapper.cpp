@@ -69,7 +69,7 @@ static void run_single_test()
     std::cout << "Enter test file name (e.g. bfs_10.txt): ";
     std::cin >> str_test_file;
 
-    run_command(str_executable + " " + str_algorithm + " tests\\" + str_test_file);
+    run_command(str_executable + " " + str_algorithm + " ..\\assignment_01\\tests\\" + str_test_file);
 }
 
 // Configures and runs all test cases for a single algorithm.
@@ -229,10 +229,10 @@ static void run_assignment_02_interactive()
         return;
     }
 
-    if (str_algorithm == "bc") {
-        run_command(str_executable + " bc dummy");
-        return;
-    }
+    // if (str_algorithm == "bc") {
+    //     run_command(str_executable + " bc dummy");
+    //     return;
+    // }
 
     // List available test files matching algorithm prefix
     std::vector<std::string> test_files = list_assignment_02_test_files(str_algorithm + "_");
@@ -249,7 +249,7 @@ static void run_assignment_02_interactive()
 
     std::string str_test_file;
     if (file_choice >= 1 && file_choice <= test_files.size()) {
-        str_test_file = "tests\\" + test_files[file_choice - 1];
+        str_test_file = "..\\assignment_02\\tests\\" + test_files[file_choice - 1];
     } else if (file_choice == test_files.size() + 1) {
         std::cout << "Enter custom file path: ";
         std::cin >> str_test_file;
