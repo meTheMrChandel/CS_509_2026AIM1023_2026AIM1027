@@ -1,0 +1,68 @@
+# =========================
+# Build artifacts
+# =========================
+*.exe
+*.out
+*.o
+*.obj
+*.a
+*.dll
+*.so
+
+# =========================
+# Build directories
+# =========================
+build/
+bin/
+dist/
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.log
+*.swp
+*.swo
+
+# =========================
+# CMake
+# =========================
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile.cmake
+compile_commands.json
+
+# =========================
+# Windows
+# =========================
+*.pdb
+*.ilk
+*.idb
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# =========================
+# Generated output
+# =========================
+outputs/
