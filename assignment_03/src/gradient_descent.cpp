@@ -77,9 +77,11 @@ double GradientDescentSolver::evaluate_polynomial(const std::vector<double>& coe
 }
 
 double GradientDescentSolver::evaluate_derivative(const std::vector<double>& coefficients, double x) {
-    (void)coefficients;
-    (void)x;
-    return 0.0;
+    double value = 0.0;
+    for (int i = static_cast<int>(coefficients.size()) - 1; i >= 1; --i) {
+        value = value * x + i * coefficients[i];
+    }
+    return value;
 }
 
 OptimizationResult GradientDescentSolver::optimize(const OptimizationConfig& config) {
