@@ -69,9 +69,11 @@ OptimizationConfig GradientDescentSolver::parse_configuration(const std::string&
 }
 
 double GradientDescentSolver::evaluate_polynomial(const std::vector<double>& coefficients, double x) {
-    (void)coefficients;
-    (void)x;
-    return 0.0;
+    double value = 0.0;
+    for (auto it = coefficients.rbegin(); it != coefficients.rend(); ++it) {
+        value = value * x + *it;
+    }
+    return value;
 }
 
 double GradientDescentSolver::evaluate_derivative(const std::vector<double>& coefficients, double x) {
