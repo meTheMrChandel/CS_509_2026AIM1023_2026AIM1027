@@ -18,7 +18,7 @@ struct OptimizationResult {
     double final_fx = 0.0;
     int iterations_completed = 0;
     bool is_converged = false;
-    long long elapsed_time_microseconds = 0;
+    double elapsed_time_microseconds = 0.0;
 };
 
 class GradientDescentSolver {

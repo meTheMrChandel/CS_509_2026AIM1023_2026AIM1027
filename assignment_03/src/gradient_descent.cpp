@@ -85,38 +85,52 @@ double GradientDescentSolver::evaluate_derivative(const std::vector<double>& coe
 }
 
 OptimizationResult GradientDescentSolver::optimize(const OptimizationConfig& config) {
-    double x = config.initial_x;
-    int iterations = 0;
-    bool converged = false;
+    const int num_runs = 100000;
+    double final_x = config.initial_x;
+    int final_iterations = 0;
+    bool final_converged = false;
 
     auto start_time = std::chrono::high_resolution_clock::now();
 
-    while (iterations < config.max_iterations) {
-        double derivative = evaluate_derivative(config.coefficients, x);
-        if (std::abs(derivative) <= config.convergence_tolerance) {
-            converged = true;
-            break;
-        }
-        x = x - config.learning_rate * derivative;
-        iterations++;
-    }
+    for (int run = 0; run < num_runs; ++run) {
+        double x = config.initial_x;
+        int iterations = 0;
+        bool converged = false;
 
-    // Final convergence check at the final point if we hit max iterations
-    if (!converged) {
-        double derivative = evaluate_derivative(config.coefficients, x);
-        if (std::abs(derivative) <= config.convergence_tolerance) {
-            converged = true;
+        while (iterations < config.max_iterations) {
+            double derivative = evaluate_derivative(config.coefficients, x);
+            if (std::abs(derivative) <= config.convergence_tolerance) {
+                converged = true;
+                break;
+            }
+            x = x - config.learning_rate * derivative;
+            iterations++;
+        }
+
+        if (!converged) {
+            double derivative = evaluate_derivative(config.coefficients, x);
+            if (std::abs(derivative) <= config.convergence_tolerance) {
+                converged = true;
+            }
+        }
+
+        if (run == 0) {
+            final_x = x;
+            final_iterations = iterations;
+            final_converged = converged;
         }
     }
 
     auto end_time = std::chrono::high_resolution_clock::now();
+    double total_time_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(end_time - start_time).count();
+    double average_time_us = (total_time_ns / num_runs) / 1000.0;
 
     OptimizationResult result;
-    result.final_x = x;
-    result.final_fx = evaluate_polynomial(config.coefficients, x);
-    result.iterations_completed = iterations;
-    result.is_converged = converged;
-    result.elapsed_time_microseconds = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time).count();
+    result.final_x = final_x;
+    result.final_fx = evaluate_polynomial(config.coefficients, final_x);
+    result.iterations_completed = final_iterations;
+    result.is_converged = final_converged;
+    result.elapsed_time_microseconds = average_time_us;
 
     return result;
 }
