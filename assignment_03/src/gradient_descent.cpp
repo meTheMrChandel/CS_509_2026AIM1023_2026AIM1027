@@ -108,10 +108,7 @@ OptimizationResult GradientDescentSolver::optimize(const OptimizationConfig& con
         }
 
         if (!converged) {
-            double derivative = evaluate_derivative(config.coefficients, x);
-            if (std::abs(derivative) <= config.convergence_tolerance) {
-                converged = true;
-            }
+            converged = (std::abs(evaluate_derivative(config.coefficients, x)) <= config.convergence_tolerance);
         }
 
         if (run == 0) {
