@@ -43,7 +43,14 @@ int main() {
             return 1;
         }
     } else if (choice == 2) {
-        MaxflowMincutSolver::solve(filepath);
+        try {
+            MaxflowAdjacencyInput input = MaxflowMincutSolver::parse_input(filepath);
+            MaxflowCSRGraph csr_graph = MaxflowMincutSolver::convert_to_csr(input);
+            MaxflowMincutSolver::solve(csr_graph);
+        } catch (const std::exception& e) {
+            std::cerr << "\nError: " << e.what() << "\n";
+            return 1;
+        }
     } else {
         std::cerr << "Error: Selection must be 1 or 2.\n";
         return 1;
