@@ -1,0 +1,8 @@
+# Exclude binaries
+main.exe
+*.exe
+
+# Exclude object files
+src/*.o
+driver/*.o
+*.o
